@@ -36,3 +36,26 @@ Aplicația pornește implicit pe `http://localhost:8080`, iar pagina principală
 ## Ce trebuie să faci tu
 
 Repo-ul nu include workflow-urile finale de curs. Le adaugi tu pas cu pas în `.github/workflows`, conform lecțiilor.
+
+## CI/CD Artifacts & Docker Images
+
+### Maven Package (Github Packages)
+
+- **Tag folosit:** `0.0.1-SNAPSHOT`
+- **Motiv:** Maven foloseste versiunea din `pom.xml`. Pentru fiecare commit, workflow-ul `publish-artifact.yml` publică același artifact cu această versiune în GitHub Packages.
+
+### Docker Images (GHCR)
+
+- **Tag folosit:** `sha<commit>`
+  - Fiecare build are tag unic asociat SHA-ul commit-ului
+  - Avantaj: poti identifica exact codul sursa pentru imaginea respectiva
+- **Tag folosit:** `latest`
+  - Reprezinta ultima versiune stabila/deployata
+  - Avantaj: simplifica testarea si rularea rapida a imaginii fara a verifica SHA
+
+**Exemple concrete:**
+
+```text
+ghcr.io/skillbrain-devops/java-app:sha-abc123def
+ghcr.io/skillbrain-devops/java-app:latest
+```
