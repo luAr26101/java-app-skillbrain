@@ -1,4 +1,4 @@
-name: backup-to-s3
+name: backs3
 
 on:
   workflow_dispatch:
